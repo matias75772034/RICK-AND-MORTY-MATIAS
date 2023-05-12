@@ -44,7 +44,6 @@ const Favorites = ({myFavorites})=> {
                             origin = {character.origin}
                             status ={character.status}
                             image={character.image}
-                            
                         />
                     )
                 })
