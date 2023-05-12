@@ -1,11 +1,13 @@
 import style from './Card.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addFav, removeFav} from '../../redux/actions';
 import { useEffect, useState } from 'react';
 
 function Card(props) {
    const {id, name, gender, species, image, status, origin, onClose, addFav, removeFav, myFavorites  } = props
+
+   const { pathname } = useLocation()
 
    const [ isFav, setIsFav ] = useState(false)
 
@@ -49,12 +51,16 @@ function Card(props) {
             </div>
          
             <div className={style.back}>
-               <button 
-                  className={style.btn}
-                  onClick={()=> onClose(id)}
-               >
-                     X
-               </button>
+               {
+                  !pathname.includes('/favorites') &&
+                  <button 
+                     className={style.btn}
+                     onClick={()=> onClose(id)}
+                  >
+                        X
+                  </button>
+               }
+
                <Link to = {`/detail/${id}`}>
                   <h2>{name}</h2>
                </Link>
